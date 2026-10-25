@@ -37,17 +37,17 @@ test('the complete portfolio renders with working anchor targets and local asset
     assert.equal(url.hash, '#projects');
     projectLinks += 1;
   }
-  assert.ok(projectLinks >= 6, 'Hero and skills should link directly to real projects');
+  assert.ok(projectLinks >= 6, 'The showcase, archive, and disciplines should link directly to real projects');
   for (const [, source] of html.matchAll(/<img[^>]+src="([^"]+)"/g)) assert.ok(existsSync(resolve('public', source.replace(/^\.\//, ''))), 'Missing image: ' + source);
   assert.equal([...html.matchAll(/<h1[ >]/g)].length, 1);
-  assert.equal([...html.matchAll(/<article class="project-card"/g)].length, 6);
-  assert.equal([...html.matchAll(/class="project-featured-badge"/g)].length, 6);
+  assert.equal([...html.matchAll(/<article class="showcase-panel"/g)].length, 3);
+  assert.equal([...html.matchAll(/class="archive-row"/g)].length, 6);
   assert.ok(html.includes('Show all 17 projects'));
   assert.ok(html.includes('Search all 17 projects'));
   assert.ok(html.includes('id="project-search"'));
   assert.ok(!html.includes('github.com/SupremeStha'));
-  for (const label of ['Poke the desk buddy', 'Shuffle the stack', 'Your drawing canvas', 'Start 15-second round', 'Save PNG', 'Open email draft', 'Open search and jump menu']) assert.ok(html.includes(label), 'Missing interaction: ' + label);
-  assert.ok(html.includes('role="tablist"'));
-  assert.ok(html.includes('aria-label="Explore skill groups"'));
+  for (const label of ['Void theme', 'Ion theme', 'Pearl theme', 'Pause animations', 'Interactive particle field', 'Reset particle field', 'Open email draft', 'Open navigation menu', 'Start a conversation']) assert.ok(html.includes(label), 'Missing interaction: ' + label);
+  assert.ok(html.includes('aria-label="Skills and disciplines"'));
+  assert.ok(html.includes('aria-label="Filter projects by category"'));
   assert.ok(html.includes('<details'));
 });

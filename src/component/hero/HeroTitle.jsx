@@ -1,51 +1,29 @@
-import { useState } from 'react';
-import { ArrowDownRight, ArrowUpRight, Code2, Github, MoveUpRight, RotateCcw, Sparkles } from 'lucide-react';
-import DeskBuddy from './DeskBuddy';
-import DraggableSticker from './DraggableSticker';
-import { getProjectHref, navigateToProject } from '../../lib/projectNavigation';
+import { ArrowDown, ArrowUpRight, Github } from 'lucide-react';
+import OrbitalSculpture from './OrbitalSculpture';
 import './HeroTitle.css';
 
-const STARTING_POINTS = [
-  { id: 'group-ride-sharing', label: 'a ride', title: 'Explore Ride Map' },
-  { id: 'robotic-arm-rl', label: 'a robot', title: 'Explore Robotic Arm Learning' },
-  { id: 'risk-evaluation', label: 'a risk model', title: 'Explore BIPAD Risk Platform' },
-];
-
 export default function HeroTitle({ motionOn }) {
-  const [deskVersion, setDeskVersion] = useState(0);
   return (
     <section className="hero" id="home" aria-labelledby="hero-heading">
       <div className="container">
-        <div className="hero-topline mono"><span>A SMALL CORNER OF THE INTERNET</span><span>KATHMANDU, NEPAL <MoveUpRight size={12} aria-hidden="true" /></span></div>
+        <div className="hero-topline mono hero-enter"><span><i /> A MIND IN MOTION</span><span>KATHMANDU, NP <span className="hero-coordinates">27.71° N / 85.32° E</span></span></div>
         <div className="hero-stage">
           <div className="hero-copy">
-            <p className="handwritten hero-hello">hey, I’m Suprem <span aria-hidden="true">↙</span></p>
-            <h1 id="hero-heading"><span>I make</span><span>things <em>click.</em></span></h1>
-            <p className="hero-description">Computer science student in Kathmandu. I build apps, experiment with data, and occasionally teach a simulated robot where to put a cube.</p>
-            <div className="hero-actions">
-              <a className="button hero-work-button" href="#projects">Proof? Right this way. <ArrowDownRight size={22} aria-hidden="true" /></a>
-              <a className="hero-github" href="https://github.com/SupremShrestha" target="_blank" rel="noopener noreferrer" aria-label="Find me on GitHub"><Github size={21} aria-hidden="true" /><ArrowUpRight size={12} aria-hidden="true" /></a>
-            </div>
-            <nav className="hero-starting-points" aria-label="Start with a project">
-              <span className="mono">Or start with</span>
-              {STARTING_POINTS.map((project) => <a key={project.id} href={getProjectHref(project.id)} aria-label={project.title}
-                onClick={(event) => {
-                  if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-                  event.preventDefault();
-                  navigateToProject(project.id);
-                }}>{project.label}<ArrowUpRight size={12} aria-hidden="true" /></a>)}
-            </nav>
+            <p className="hero-intro hero-enter">Suprem Shrestha <span>— Developer & AI explorer</span></p>
+            <h1 id="hero-heading"><span className="hero-line"><span>Curiosity.</span></span><span className="hero-line"><span>Code.</span></span><span className="hero-line hero-line-last"><span>A little <em>chaos.</em></span></span></h1>
+            <div className="hero-description-row hero-enter"><span className="hero-plus" aria-hidden="true">↳</span><p>I turn curious ideas into things you can use.<br />Exploring the space between thoughtful interfaces<br className="desktop-break" /> and intelligent systems.</p></div>
+            <div className="hero-actions hero-enter"><a className="button" href="#projects">Explore my work <ArrowUpRight size={20} /></a><a className="hero-social" href="https://github.com/SupremShrestha" target="_blank" rel="noopener noreferrer" aria-label="Find me on GitHub"><Github size={20} /><ArrowUpRight size={13} /></a></div>
           </div>
-          <div className="hero-side"><DeskBuddy motionOn={motionOn} /><p className="handwritten buddy-note">he’s part of the team.<br />very little work gets done.</p></div>
-          <div key={deskVersion} className="sticker-layer">
-            <DraggableSticker className="sticker-build" label="Built by a human"><Sparkles size={18} aria-hidden="true" /><span>BUILT BY<br /><strong>A HUMAN.</strong></span></DraggableSticker>
-            <DraggableSticker className="sticker-code" label="Try, break, learn, repeat"><Code2 size={23} aria-hidden="true" /><span>try. break.<br />learn. repeat.</span></DraggableSticker>
-            <DraggableSticker className="sticker-note" label="Work in progress"><span className="handwritten">always a<br />work in progress</span><span className="note-star" aria-hidden="true">✳</span></DraggableSticker>
+          <div className="hero-visual hero-enter">
+            <div className="orbital-cross orbital-cross-one" aria-hidden="true">+</div><div className="orbital-cross orbital-cross-two" aria-hidden="true">+</div>
+            <OrbitalSculpture motionOn={motionOn} />
+            <div className="orbital-label mono"><span>FIG. 01 — CONSTANTLY EVOLVING</span><span>CODE × CURIOSITY</span></div>
+            <span className="hero-orbit-tag mono"><i /> EXPLORING WHAT’S NEXT</span>
           </div>
         </div>
-        <div className="hero-bottom"><a href="#playground" className="playground-nudge"><span className="nudge-star" aria-hidden="true">✳</span> Psst. There’s a playground down there. <ArrowDownRight size={17} aria-hidden="true" /></a><button type="button" className="reset-desk" onClick={() => setDeskVersion((version) => version + 1)}><RotateCcw size={12} aria-hidden="true" />reset the stickers</button></div>
+        <div className="hero-bottom hero-enter"><a href="#projects" className="scroll-cue"><span><ArrowDown size={16} /></span><span className="mono">SCROLL TO EXPLORE</span></a><p className="mono">A COLLECTION OF WORK,<br />EXPERIMENTS & HAPPY ACCIDENTS.</p><span className="hero-edition mono">PORTFOLIO / VOL. 01</span></div>
       </div>
-      <div className="ticker" aria-label="Code, break, learn, repeat"><div className="ticker-track" aria-hidden="true">{[0, 1, 2, 3].map((item) => <span key={item}>MAKE SOMETHING <b>✳</b> BREAK SOMETHING <b>↗</b> LEARN SOMETHING <b>✳</b> REPEAT <b>↻</b></span>)}</div><span className="visually-hidden">Make something. Break something. Learn something. Repeat.</span></div>
+      <div className="ticker" aria-label="Development, design, and artificial intelligence"><div className="ticker-track" aria-hidden="true">{[0, 1, 2, 3].map((item) => <span key={item}>CREATIVE DEVELOPMENT <b>✳</b> ARTIFICIAL INTELLIGENCE <b>✳</b> ENDLESS CURIOSITY <b>✳</b> </span>)}</div></div>
     </section>
   );
 }

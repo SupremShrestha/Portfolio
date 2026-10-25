@@ -5,8 +5,8 @@ import { getProjectHref, navigateToProject } from '../../lib/projectNavigation';
 import './SiteTools.css';
 
 const PLACES = [
-  { id: 'home', number: '01', title: 'Back to the desk', detail: 'Home · Suprem Shrestha', keywords: 'home introduction start hero' },
-  { id: 'projects', number: '02', title: 'See what I’ve built', detail: `The project drawer · All ${PROJECTS.length} projects`, keywords: 'projects work portfolio builds development data automation' },
+  { id: 'home', number: '01', title: 'Back to the beginning', detail: 'Home · Suprem Shrestha', keywords: 'home introduction start hero' },
+  { id: 'projects', number: '02', title: 'See what I’ve built', detail: `The project collection · All ${PROJECTS.length} projects`, keywords: 'projects work portfolio builds development data automation' },
   { id: 'about', number: '03', title: 'Meet the human', detail: 'About · Skills & a little personality', keywords: 'about biography skills human me' },
   { id: 'education', number: '04', title: 'The learning bit', detail: 'Education · The journey so far', keywords: 'education school university learning journey experience' },
   { id: 'playground', number: '05', title: 'Go play something', detail: 'Playground · Doodles & bug catching', keywords: 'playground game fun draw doodle bugs canvas' },

@@ -94,6 +94,7 @@ export default function Projects() {
     if (!isProjectOpen) return;
     const dialog = dialogRef.current;
     const opener = document.activeElement;
+    const toolbar = toolbarRef.current;
     const previousOverflow = document.body.style.overflow;
     if (!opener || opener === document.body) document.getElementById('projects')?.scrollIntoView({ behavior: 'instant', block: 'start' });
     if (!dialog.open) dialog.showModal();
@@ -102,7 +103,7 @@ export default function Projects() {
       document.body.style.overflow = previousOverflow;
       if (dialog.open) dialog.close();
       if (opener?.isConnected && opener !== document.body) opener.focus({ preventScroll: true });
-      else toolbarRef.current?.focus({ preventScroll: true });
+      else toolbar?.focus({ preventScroll: true });
     };
   }, [isProjectOpen]);
 
@@ -175,19 +176,19 @@ export default function Projects() {
       <div className="container">
         <div className="project-section-heading">
           <div>
-            <p className="project-eyebrow mono"><FolderOpen size={18} aria-hidden="true" /> 01 / THE PROJECT DRAWER</p>
-            <h2 className="section-title" id="projects-heading">Stuff I’ve<br />built<span className="project-title-star" aria-hidden="true">✳</span>.</h2>
+            <p className="section-label">01 / SELECTED WORK</p>
+            <h2 className="section-title" id="projects-heading">Less talk.<br /><em>More building.</em></h2>
           </div>
           <div className="project-heading-note">
-            <span className="project-handwriting">open one. have a look. ↙</span>
-            <p>A few selected builds up front. The whole drawer is here when you’re curious.</p>
+            <span className="project-handwriting">A FEW THINGS I’VE PUT INTO THE WORLD</span>
+            <p>From realtime apps to learning machines. Ideas explored, problems worked through, and things shipped.</p>
           </div>
         </div>
 
         <div className="project-browser-tools" ref={toolbarRef} tabIndex={-1}>
           <div className="project-search-row">
             <div className="project-search">
-              <label htmlFor="project-search">Search the drawer</label>
+              <label htmlFor="project-search">Find something interesting</label>
               <div className="project-search-field">
                 <Search size={20} aria-hidden="true" />
                 <input ref={searchRef} id="project-search" type="search" value={query} onChange={(event) => setQuery(event.target.value)}
@@ -195,7 +196,7 @@ export default function Projects() {
                 {query && <button type="button" className="project-clear-search" aria-label="Clear search" onClick={() => { setQuery(''); searchRef.current?.focus(); }}><X size={19} aria-hidden="true" /></button>}
               </div>
             </div>
-            <p id="project-search-help">Search all {PROJECTS.length} projects, including the ones tucked away.</p>
+            <p id="project-search-help">Search all {PROJECTS.length} projects, by idea, category, or technology.</p>
           </div>
           <div className="project-toolbar">
             <div className="project-filters" role="group" aria-label="Filter projects by category">
@@ -216,7 +217,7 @@ export default function Projects() {
         <div className="project-results-summary">
           <p className="project-count mono" role="status" aria-live="polite" aria-atomic="true">
             <strong>Showing {projects.length} of {PROJECTS.length} projects</strong>
-            <span>{projectOrder ? 'shuffled & ready' : 'selected builds first'}{hasFilters ? ' · matching your filters' : ''}</span>
+            <span>{projectOrder ? 'shuffled collection' : 'the selected collection'}{hasFilters ? ' · matching your filters' : ''}</span>
           </p>
           <div className="project-result-actions">
             <div className="project-layout-switch" role="group" aria-label="Project display">
@@ -243,33 +244,33 @@ export default function Projects() {
               <a className="project-image-button" href={getProjectHref(project.id)} onClick={(event) => openProjectLink(event, project.id)}
                 aria-label={`View details for ${project.title}`}>
                 <ProjectImage key={project.image} project={project} />
-                <span className="project-image-action"><Maximize2 size={17} aria-hidden="true" /> Take a closer look</span>
+                <span className="project-image-action"><Maximize2 size={17} aria-hidden="true" /> Explore project</span>
                 <span className="project-image-corner" aria-hidden="true"><ArrowUpRight size={26} /></span>
               </a>
               <div className="project-card-copy">
-                <div className="project-card-meta"><p className="project-category mono">{project.category}</p>{project.featured && <span className="project-featured-badge">Selected build</span>}</div>
+                <div className="project-card-meta"><p className="project-category mono">{project.category}</p>{project.featured && <span className="project-featured-badge">Featured</span>}</div>
                 <div className="project-card-heading">
                   <h3><a href={getProjectHref(project.id)} onClick={(event) => openProjectLink(event, project.id)}>{project.title}</a></h3>
                   <a className="project-github" href={project.github} target="_blank" rel="noopener noreferrer" aria-label={`${project.title} source on GitHub`}><Github size={22} aria-hidden="true" /></a>
                 </div>
                 <p className="project-subtitle">{project.subtitle}</p>
                 <ul className="project-tech" aria-label="Technologies">{project.technologies.map((tech) => <li key={tech}>{tech}</li>)}</ul>
-                <a className="project-details-button" href={getProjectHref(project.id)} onClick={(event) => openProjectLink(event, project.id)} aria-label={`Open case file for ${project.title}`}>
-                  <span>Open case file <span className="mono">/{project.number}</span></span><ArrowRight size={20} aria-hidden="true" />
+                <a className="project-details-button" href={getProjectHref(project.id)} onClick={(event) => openProjectLink(event, project.id)} aria-label={`Explore project for ${project.title}`}>
+                  <span>Explore project <span className="mono">/{project.number}</span></span><ArrowRight size={20} aria-hidden="true" />
                 </a>
               </div>
             </article>
           ))}
           {projects.length === 0 && <div className="project-empty">
             <FolderOpen size={38} aria-hidden="true" />
-            <h3>Nothing in this corner of the drawer.</h3>
+            <h3>No projects found.</h3>
             <p>Try another search or category. There are {PROJECTS.length} projects to explore.</p>
             <button className="button button-outline" type="button" onClick={resetFilters}>Reset filters <RotateCcw size={18} aria-hidden="true" /></button>
           </div>}
         </div>
         {canExpand && expanded && <div className="project-bottom-collapse"><button className="project-view-toggle" type="button" aria-expanded="true" aria-controls="project-grid" onClick={toggleExpanded}>Show fewer <ChevronUp size={18} aria-hidden="true" /></button></div>}
         <div className="project-end">
-          <span className="project-handwriting">always making something…</span>
+          <span className="project-handwriting">THERE’S ALWAYS ANOTHER IDEA IN PROGRESS.</span>
           <a href="https://github.com/SupremShrestha" target="_blank" rel="noopener noreferrer" className="text-link">Browse my GitHub <ArrowUpRight size={20} aria-hidden="true" /></a>
         </div>
       </div>
@@ -279,7 +280,7 @@ export default function Projects() {
         {selectedProject && <div className="project-dialog-inner">
           <div className="project-dialog-header">
             <div className="project-dialog-topline">
-              <span className="mono">CASE FILE / {selectedProject.number}</span>
+              <span className="mono">PROJECT / {selectedProject.number}</span>
               <button className="project-dialog-close" type="button" aria-label="Close project details" onClick={closeProject} autoFocus><X size={23} aria-hidden="true" /></button>
             </div>
             <nav className="project-dialog-navigation" aria-label="Browse matching projects">

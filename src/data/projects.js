@@ -140,12 +140,12 @@ export const PROJECTS = [
   },
   {
     id: 'portfolio', title: 'This Portfolio',
-    subtitle: 'The little corner of the internet you are in.',
-    description: 'A React and Vite portfolio built as an interactive notebook: a project drawer, draggable stickers, a drawing pad, and a small game. Includes light and dark themes, reduced-motion support, and contact draft or EmailJS delivery options.',
+    subtitle: 'Engineering ideas. Designing possibilities.',
+    description: 'A React and Vite portfolio with a cinematic opening, a scroll-driven horizontal project showcase, and an interactive particle experiment. Three selectable themes, reduced-motion support, project deep links, and contact draft or EmailJS delivery options complete the experience.',
     image: 'projects/portfolio.svg', category: 'Development',
     technologies: ['React', 'Vite', 'CSS', 'EmailJS'],
     repository: 'Portfolio',
-    highlights: ['Searchable project drawer with detail dialogs.', 'Draggable stickers, a sketchpad, and a bug-catching game.', 'Keyboard access, reduced motion, and persistent theme preferences.'],
+    highlights: ['Pinned project stories, a searchable archive, and shareable project detail sheets.', 'GSAP scroll choreography and a pointer- and keyboard-controlled particle field.', 'Three persistent color themes, keyboard navigation, and reduced-motion support.'],
   },
   {
     id: 'n8n-automation', title: 'n8n on Render',
@@ -159,7 +159,7 @@ export const PROJECTS = [
 ].map((project, index) => ({
   ...project,
   number: String(index + 1).padStart(2, '0'),
-  alt: project.alt || project.title + ' project preview',
+  alt: project.alt || project.title + ' — illustrative project cover',
   github: 'https://github.com/SupremShrestha/' + project.repository,
 }));
 

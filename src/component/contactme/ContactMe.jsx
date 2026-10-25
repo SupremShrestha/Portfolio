@@ -76,11 +76,11 @@ export default function Contact() {
   return (
     <section className="section contact-section" id="contact" aria-labelledby="contact-heading">
       <div className="container">
-        <p className="section-label">05 / A NOTE IN MY INBOX</p>
+        <p className="section-label">05 / GOOD THINGS START WITH A HELLO</p>
         <div className="contact-layout">
           <div className="contact-copy">
-            <h2 className="section-title" id="contact-heading">Your idea.<br />My inbox<span>↗</span></h2>
-            <p>Got a project? A question? A really good joke?<br />I’m all ears.</p>
+            <h2 className="section-title" id="contact-heading">Have a spark?<br />Let’s make<br /><em>something.</em><span>↗</span></h2>
+            <p>An interesting idea, a collaboration, or just a hello.<br />There’s always room for a good conversation.</p>
             <div className="email-block">
               <span className="mono">DROP ME A LINE</span>
               <div className="email-address-row"><a href={'mailto:' + CONTACT_EMAIL}>{CONTACT_EMAIL}</a><button className="copy-email" type="button" aria-label="Copy email address" onClick={() => copy('email', CONTACT_EMAIL)}>{copyFeedback.email === 'copied' ? <Check size={16} /> : <Copy size={16} />}</button></div>

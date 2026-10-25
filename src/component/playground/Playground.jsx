@@ -304,7 +304,7 @@ export default function Playground({ motionOn = true }) {
   return (
     <section id="playground" className="section playground-section" aria-labelledby="playground-heading">
       <div className="container">
-        <div className="playground-intro"><div><p className="section-label">04 / A little off-script</p><h2 className="section-title" id="playground-heading">Serious about<br /><span>playing around.</span><svg className="playground-title-scribble" viewBox="0 0 360 14" preserveAspectRatio="none" aria-hidden="true"><path d="M3 9Q103-2 196 7T357 6M39 12Q161 4 306 11" /></svg></h2></div><p>Good things happen when you get curious.<br />Take a break. Click something. Make a mess.<span className="playground-handnote">yes, these actually work ↙</span></p></div>
+        <div className="playground-intro"><div><p className="section-label">04 / THE EXPERIMENTAL SIDE</p><h2 className="section-title" id="playground-heading">Permission<br /><span>to play.</span><svg className="playground-title-scribble" viewBox="0 0 360 14" preserveAspectRatio="none" aria-hidden="true"><path d="M3 9Q103-2 196 7T357 6M39 12Q161 4 306 11" /></svg></h2></div><p>Good things happen when you get curious.<br />Take a break. Click something. Make a mess.<span className="playground-handnote">LESS SCROLLING. MORE PLAYING.</span></p></div>
         <div className="playground-grid"><DrawingPad /><BugGame motionOn={motionOn} /></div>
         <p className="playground-footnote mono"><span aria-hidden="true">✳</span> Built for the joy of building things.</p>
       </div>

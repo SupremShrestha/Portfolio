@@ -1,14 +1,14 @@
-.shortcut-trigger { position: fixed; bottom: 21px; right: 22px; z-index: 30; display: flex; align-items: center; gap: 9px; border: 2px solid var(--ink); background: var(--lemon); color: var(--tint-ink); border-radius: 4px; box-shadow: 3px 3px 0 var(--ink); padding: 11px 13px; font: 14px 'Courier New', monospace; transition: transform .2s, box-shadow .2s; }
-.shortcut-trigger:hover { transform: translate(-2px, -2px) rotate(-3deg); box-shadow: 5px 5px 0 var(--ink); }
-.shortcut-dialog { border: 2px solid var(--ink); border-radius: 5px; box-shadow: 8px 8px 0 var(--ink); background: var(--paper); color: var(--ink); width: min(640px, calc(100vw - 38px)); max-height: 90dvh; overflow: hidden; padding: 0; }
-.shortcut-dialog::backdrop { background: #0009; backdrop-filter: blur(4px); }
+.shortcut-trigger { position: fixed; bottom: 21px; right: 22px; z-index: 30; display: flex; align-items: center; gap: 9px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); border-radius: 50px; box-shadow: 0 4px 24px #0001; padding: 11px 13px; font: 14px 'Courier New', monospace; transition: transform .2s, box-shadow .2s; }
+.shortcut-trigger:hover { transform: translateY(-3px); box-shadow: 0 8px 25px #0002; }
+.shortcut-dialog { border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 25px 100px #0003; background: var(--paper); color: var(--ink); width: min(640px, calc(100vw - 38px)); max-height: 90dvh; overflow: hidden; padding: 0; }
+.shortcut-dialog::backdrop { background: #12170fbb; backdrop-filter: blur(4px); }
 .shortcut-inner { display: flex; flex-direction: column; max-height: calc(90dvh - 4px); padding: 25px 27px 21px; }
 .shortcut-heading { flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; gap: 15px; }
 .shortcut-heading h2 { font-size: 29px; letter-spacing: -1.5px; font-weight: 900; }
 .shortcut-heading > button { border: 1.5px solid var(--ink); background: var(--panel); color: var(--ink); padding: 7px; display: grid; place-items: center; }
 .shortcut-heading > button:hover { background: var(--lilac); color: var(--tint-ink); }
 .shortcut-intro { flex-shrink: 0; margin-top: 9px; color: var(--muted); font-size: 12px; line-height: 1.6; }
-.shortcut-search { flex-shrink: 0; display: flex; align-items: center; gap: 12px; margin-top: 21px; min-height: 49px; padding-inline: 13px; border: 2px solid var(--ink); background: var(--panel); box-shadow: 3px 3px 0 var(--lilac); }
+.shortcut-search { flex-shrink: 0; display: flex; align-items: center; gap: 12px; margin-top: 21px; min-height: 49px; padding-inline: 13px; border: 1px solid var(--line); background: var(--panel); box-shadow: none; }
 .shortcut-search:focus-within { outline: 2px solid var(--accent); outline-offset: 3px; }
 .shortcut-search > svg { flex-shrink: 0; color: var(--accent); }
 .shortcut-search input { min-width: 0; width: 100%; min-height: 45px; padding: 10px 0; border: 0; outline: 0; color: var(--ink); background: transparent; font-size: 13px; }
@@ -22,10 +22,10 @@
 .shortcut-results-meta kbd { font-family: inherit; color: var(--ink); }
 .shortcut-results { min-height: 80px; overflow-y: auto; overscroll-behavior: contain; padding: 0 5px 5px 2px; margin: 0 -5px 0 -2px; scrollbar-width: thin; scrollbar-color: var(--muted) var(--paper); }
 .shortcut-result-group + .shortcut-result-group { margin-top: 21px; }
-.shortcut-result-group > h3 { display: flex; justify-content: space-between; gap: 15px; margin-bottom: 5px; padding: 7px 9px; font-size: 9px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; background: var(--lilac-soft); }
+.shortcut-result-group > h3 { display: flex; justify-content: space-between; gap: 15px; margin-bottom: 5px; padding: 7px 9px; font-size: 9px; font-weight: 400; letter-spacing: 1.2px; text-transform: uppercase; background: var(--lilac-soft); }
 .shortcut-result-group > h3 > span { color: var(--muted); font-weight: 400; }
 .shortcut-project-results > h3 { background: var(--accent-soft); }
-.shortcut-result-group > a { position: relative; display: flex; align-items: center; gap: 13px; min-height: 59px; padding: 10px 9px; border-bottom: 1px dashed var(--soft); }
+.shortcut-result-group > a { position: relative; display: flex; align-items: center; gap: 13px; min-height: 59px; padding: 10px 9px; border-bottom: 1px solid var(--line); }
 .shortcut-result-group > a:hover, .shortcut-result-group > a:focus { color: var(--ink); background: var(--accent-soft); }
 .shortcut-result-group > a:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
 .shortcut-result-number { flex: 0 0 24px; color: var(--muted); font-size: 10px; }
@@ -43,10 +43,10 @@
 .shortcut-empty > svg { margin-bottom: 15px; color: var(--accent); }
 .shortcut-empty h3 { max-width: 100%; color: var(--ink); font-size: 15px; font-weight: 700; overflow-wrap: anywhere; line-height: 1.5; }
 .shortcut-empty p { max-width: 300px; margin-top: 9px; color: var(--muted); font-size: 12px; line-height: 1.7; }
-.shortcut-empty > button { display: inline-flex; align-items: center; gap: 12px; margin-top: 20px; padding: 9px 12px; border: 1px solid var(--ink); color: var(--ink); background: var(--panel); font-size: 11px; }
+.shortcut-empty > button { display: inline-flex; align-items: center; gap: 12px; margin-top: 20px; padding: 9px 12px; border: 1px solid var(--line); color: var(--ink); background: var(--panel); font-size: 11px; }
 .shortcut-empty > button:hover { background: var(--lilac); color: var(--tint-ink); }
-.shortcut-preferences { flex-shrink: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding-top: 17px; margin-top: 14px; border-top: 1px dashed var(--muted); }
-.shortcut-preferences > button { display: flex; align-items: center; gap: 8px; min-height: 40px; padding: 9px 10px; border: 1px solid var(--ink); color: var(--ink); background: var(--panel); font-size: 11px; }
+.shortcut-preferences { flex-shrink: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding-top: 17px; margin-top: 14px; border-top: 1px solid var(--line); }
+.shortcut-preferences > button { display: flex; align-items: center; gap: 8px; min-height: 40px; padding: 9px 10px; border: 1px solid var(--line); color: var(--ink); background: var(--panel); font-size: 11px; }
 .shortcut-preferences > button > svg { color: var(--muted); }
 .shortcut-preferences > button > strong { margin-left: auto; padding: 2px 6px; border: 1px solid var(--line); color: var(--ink); background: var(--paper); font: 9px 'Courier New', monospace; }
 .shortcut-preferences > button:hover:not(:disabled) { background: var(--lilac-soft); }

@@ -1,6 +1,8 @@
-# Project image placeholders
+# Project artwork
 
-These 17 files are native SVG vector covers, not product screenshots. Each cover is 1200 × 750 pixels (8:5), uses a notebook layout, and clearly marks the project image as coming soon. They have no external fonts, assets, or dependencies.
+These 17 local SVG covers are original illustrative artwork, not product screenshots. Each is 1200 × 750 pixels (8:5). The six featured projects have custom concepts: a shared ride map, a simulated robot arm, a spatial risk study, an ML pipeline, a restaurant interface, and a sonar signal. The remaining projects use a coordinated abstract series.
+
+The editable generator is `scripts/generate-project-covers.mjs`. Run `node scripts/generate-project-covers.mjs` to regenerate SVG covers. Projects whose image field points to a PNG, JPG, or WebP are skipped. No external assets or font services are used.
 
 | File slug | Project |
 | --- | --- |

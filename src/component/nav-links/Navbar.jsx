@@ -3,11 +3,11 @@ import { Menu, Moon, Pause, Play, Sun, X } from 'lucide-react';
 import './Navbar.css';
 
 const SECTIONS = [
-  { id: 'home', label: 'home' },
-  { id: 'projects', label: 'work' },
-  { id: 'about', label: 'about' },
-  { id: 'playground', label: 'play' },
-  { id: 'contact', label: 'say hi ↗' },
+  { id: 'home', label: 'Home' },
+  { id: 'projects', label: 'Work' },
+  { id: 'about', label: 'About' },
+  { id: 'playground', label: 'Play' },
+  { id: 'contact', label: 'Let’s talk ↗' },
 ];
 
 export default function Navbar({ theme, toggleTheme, motionOn, toggleMotion, reducedMotion }) {

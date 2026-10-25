@@ -12,10 +12,10 @@ export default function Education() {
     <section className="section education-section" id="education" aria-labelledby="education-heading">
       <div className="container education-layout">
         <div className="education-intro">
-          <p className="section-label">03 / NOTES FROM CLASS</p>
-          <h2 id="education-heading" className="section-title">Still figuring<br />things out.<br /><span>Still learning.</span></h2>
-          <p>Some of the places where<br />the dots started connecting.</p>
-          <div className="education-margin-note" aria-hidden="true"><BookOpen size={27} strokeWidth={1.5} /><span>One chapter<br />at a time.</span><ArrowDownRight size={30} strokeWidth={1.5} /></div>
+          <p className="section-label">03 / THE JOURNEY</p>
+          <h2 id="education-heading" className="section-title">Never done<br /><span>learning.</span></h2>
+          <p>The foundations, the questions,<br />and everything that comes next.</p>
+          <div className="education-margin-note" aria-hidden="true"><BookOpen size={27} strokeWidth={1.5} /><span>Stay curious.<br />Keep going.</span><ArrowDownRight size={30} strokeWidth={1.5} /></div>
         </div>
         <ol className="education-list">
           {EDUCATION.map((item, index) => (
