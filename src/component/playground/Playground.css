@@ -1,0 +1,115 @@
+.playground-section { overflow: hidden; background: var(--paper); }
+.playground-intro { display: flex; justify-content: space-between; align-items: flex-end; gap: 48px; margin-bottom: 54px; }
+.playground-intro .section-title { position: relative; padding-bottom: 18px; }
+.playground-intro .section-title > span { font-style: italic; color: var(--accent); }
+.playground-intro > p { max-width: 330px; margin-bottom: 13px; color: var(--muted); line-height: 1.8; font-size: 14px; }
+.playground-title-scribble { position: absolute; bottom: 0; left: 0; width: 100%; height: 13px; overflow: visible; fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; }
+.playground-handnote { display: block; margin-top: 22px; color: var(--ink); font: italic 16px Georgia, serif; transform: rotate(-4deg); }
+.playground-grid { display: grid; grid-template-columns: 1.12fr 1fr; align-items: start; gap: 32px; }
+.plaything { min-width: 0; padding: 25px; border: 2px solid var(--ink); background: var(--panel); color: var(--ink); box-shadow: 7px 7px 0 var(--ink); }
+.sketch-pad { transform: rotate(-0.7deg); }
+.bug-game { margin-top: 26px; transform: rotate(0.65deg); }
+.plaything-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 24px; margin-bottom: 22px; }
+.plaything-top > .mono { font-size: 9px; letter-spacing: 1px; }
+.plaything-tag { flex: 0 0 auto; padding: 3px 7px; border: 1px solid var(--ink); background: var(--lemon); color: var(--tint-ink); transform: rotate(5deg); font: italic 11px Georgia, serif; }
+.bug-tag { transform: rotate(-4deg); background: var(--lilac); }
+.plaything-heading { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.plaything-heading h3 { margin: 0; font-size: clamp(23px, 2.5vw, 33px); font-weight: 750; letter-spacing: -1.4px; line-height: 1.2; }
+.plaything-heading > svg { flex: 0 0 auto; transform: rotate(-12deg); }
+.plaything-description { margin-top: 10px; margin-bottom: 23px; color: var(--muted); font-size: 12px; line-height: 1.7; }
+.sketch-toolbar, .sketch-bottom { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.sketch-toolbar { margin-bottom: 12px; }
+.sketch-tool-group { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; }
+.play-tool { display: inline-flex; justify-content: center; align-items: center; gap: 6px; min-height: 36px; padding: 7px 9px; border: 1px solid transparent; background: transparent; color: var(--ink); font-family: inherit; font-size: 11px; font-weight: 550; cursor: pointer; transition: background 140ms, transform 140ms; }
+.play-tool.is-active { border-color: var(--ink); background: var(--accent); color: var(--on-accent); box-shadow: 2px 2px 0 var(--ink); }
+.play-tool:hover:not(:disabled):not(.is-active) { background: var(--accent-soft); border-color: var(--ink); color: var(--ink); }
+.play-tool:active:not(:disabled) { transform: translate(1px, 1px); }
+.play-tool:disabled { cursor: default; opacity: 0.35; }
+.sketch-star { border: 1px dashed var(--ink); background: var(--lemon); color: var(--tint-ink); }
+.sketch-surface { position: relative; height: 270px; overflow: hidden; border: 1px solid var(--ink); background-color: var(--panel); background-image: radial-gradient(var(--muted) 0.7px, transparent 0.7px); background-size: 18px 18px; }
+.sketch-surface canvas { position: relative; z-index: 1; display: block; width: 100%; height: 100%; cursor: crosshair; touch-action: none; }
+.sketch-surface.is-erasing canvas { cursor: cell; }
+.sketch-surface canvas:focus-visible { outline: 3px dashed var(--ink); outline-offset: -6px; }
+.sketch-empty { position: absolute; top: 34%; left: 19%; z-index: 0; display: flex; gap: 13px; align-items: flex-start; color: var(--muted); pointer-events: none; }
+.sketch-empty > span { font: italic 19px/1.35 Georgia, serif; transform: rotate(-5deg); }
+.sketch-empty > svg { width: 60px; height: 65px; margin-top: 28px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; }
+.sketch-cursor { position: absolute; z-index: 2; width: 16px; height: 16px; border: 1px solid var(--ink); border-radius: 50%; box-shadow: 0 0 0 2px var(--panel); transform: translate(-50%, -50%); pointer-events: none; }
+.sketch-cursor::before, .sketch-cursor::after { content: ''; position: absolute; background: var(--ink); }
+.sketch-cursor::before { width: 22px; height: 1px; top: 7px; left: -4px; }
+.sketch-cursor::after { width: 1px; height: 22px; top: -4px; left: 7px; }
+.sketch-instructions, .bug-instructions { margin: 11px 0 14px; font-size: 10px; color: var(--muted); line-height: 1.7; }
+.sketch-save { border: 1px solid var(--ink); }
+.plaything-note { min-height: 31px; margin-top: 17px; padding-top: 12px; border-top: 1px dashed var(--line); color: var(--muted); font: italic 12px/1.6 Georgia, serif; }
+.bug-scoreboard { display: grid; grid-template-columns: 1fr 1.3fr 1fr; border-top: 1px dashed var(--line); border-bottom: 1px dashed var(--line); padding: 12px 0 11px; margin-bottom: 16px; }
+.bug-scoreboard > div { display: flex; flex-direction: column; align-items: center; }
+.bug-scoreboard > div + div { border-left: 1px dashed var(--line); }
+.bug-scoreboard .mono { color: var(--muted); font-size: 9px; letter-spacing: 0.6px; }
+.bug-scoreboard strong { font-family: 'Courier New', monospace; font-size: 31px; font-weight: 700; letter-spacing: -2px; line-height: 1.3; font-variant-numeric: tabular-nums; color: var(--accent); }
+.bug-scoreboard strong > small { font-size: 14px; margin-left: 2px; }
+.bug-clock.is-urgent strong { text-decoration: underline; text-underline-offset: 4px; text-decoration-style: wavy; }
+.bug-field { position: relative; height: 225px; overflow: hidden; border: 1px solid var(--ink); background-color: var(--paper); background-image: repeating-linear-gradient(-45deg, transparent, transparent 9px, var(--soft) 9px, var(--soft) 10px); }
+.bug-field-label { position: absolute; top: 9px; left: 11px; color: var(--muted); font-size: 8px; letter-spacing: 1.1px; }
+.bug-habitat { position: absolute; inset: 36px; }
+.bug-target { position: absolute; display: flex; justify-content: center; align-items: center; width: 56px; height: 56px; border: 2px solid var(--ink); background: var(--lemon); color: var(--tint-ink); border-radius: 46% 54% 47% 53%; box-shadow: 3px 3px 0 var(--ink); transform: translate(-50%, -50%) rotate(-7deg); transition: left 100ms ease-out, top 100ms ease-out, box-shadow 100ms; cursor: crosshair; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+.bug-target:hover { box-shadow: 5px 5px 0 var(--ink); }
+.bug-target:active { box-shadow: 1px 1px 0 var(--ink); }
+.bug-hit-label { position: absolute; top: -18px; right: -12px; font-family: 'Courier New', monospace; font-size: 12px; font-weight: bold; color: var(--ink); transform: rotate(10deg); }
+.bug-idle-art { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 35px 12px 20px; }
+.bug-doodle { position: relative; width: 110px; padding-top: 7px; text-align: center; transform: rotate(-10deg); }
+.bug-doodle > span { position: absolute; top: 0; right: -42px; transform: rotate(14deg); font: italic 14px Georgia, serif; }
+.bug-doodle > span::after { content: ''; display: block; width: 25px; height: 20px; border-right: 1px solid var(--ink); border-radius: 50%; transform: rotate(35deg); margin-left: 5px; }
+.bug-idle-art > p { margin-top: 14px; font: italic 15px Georgia, serif; }
+.bug-idle-art > .mono { margin-top: 9px; color: var(--muted); font-size: 8px; letter-spacing: 0.7px; }
+.bug-time-track { position: absolute; bottom: 0; width: 100%; height: 5px; }
+.bug-time-track > span { display: block; height: 100%; background: var(--accent); transition: width 1s linear; }
+.bug-game-bottom { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.play-start { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 39px; padding: 10px 12px; border: 1px solid var(--ink); background: var(--accent); color: var(--on-accent); font-family: inherit; font-size: 11px; font-weight: 600; cursor: pointer; transition: transform 140ms, box-shadow 140ms; }
+.play-start:hover { transform: translate(-2px, -2px); box-shadow: 3px 3px 0 var(--muted); }
+.play-start:active { transform: translate(0, 0); box-shadow: none; }
+.bug-disclaimer { max-width: 95px; color: var(--muted); font: italic 11px/1.4 Georgia, serif; }
+.play-tool:focus-visible, .play-start:focus-visible, .bug-target:focus-visible { outline: 2px dashed var(--ink); outline-offset: 4px; }
+.playground-footnote { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 54px; color: var(--muted); font-size: 9px; letter-spacing: 1px; }
+.playground-footnote > span { color: var(--ink); font-size: 23px; }
+@media (max-width: 1000px) {
+  .playground-grid { gap: 22px; }
+  .plaything { padding: 19px; }
+  .plaything-top { flex-wrap: wrap; min-height: 46px; gap: 8px; margin-bottom: 17px; }
+  .plaything-tag { margin-left: auto; }
+  .sketch-toolbar { flex-wrap: wrap; }
+  .sketch-star { margin-left: auto; }
+  .bug-game-bottom { align-items: flex-start; flex-direction: column; gap: 7px; }
+  .bug-disclaimer { max-width: none; }
+}
+@media (max-width: 760px) {
+  .playground-intro { align-items: flex-start; flex-direction: column; gap: 23px; margin-bottom: 42px; }
+  .playground-intro > p { max-width: 420px; }
+  .playground-handnote { margin-top: 13px; }
+  .playground-grid { grid-template-columns: 1fr; gap: 34px; }
+  .plaything { padding: 23px; }
+  .plaything-top { flex-wrap: nowrap; min-height: auto; margin-bottom: 22px; }
+  .plaything-heading h3 { font-size: 30px; }
+  .bug-game { margin-top: 0; }
+  .bug-field { height: 260px; }
+  .bug-game-bottom { flex-direction: row; align-items: center; }
+  .bug-disclaimer { max-width: 95px; }
+  .playground-footnote { margin-top: 40px; text-align: center; }
+}
+@media (max-width: 420px) {
+  .plaything { padding: 17px; box-shadow: 5px 5px 0 var(--ink); }
+  .plaything-top { gap: 7px; }
+  .plaything-top > .mono { font-size: 8px; letter-spacing: 0.5px; }
+  .plaything-tag { font-size: 10px; }
+  .plaything-heading h3 { font-size: 27px; }
+  .play-tool { padding: 7px; font-size: 10px; }
+  .sketch-empty { left: 11%; }
+  .sketch-empty > span { font-size: 17px; }
+  .sketch-empty > svg { width: 44px; }
+  .bug-scoreboard .mono { font-size: 8px; }
+  .bug-game-bottom { gap: 8px; }
+  .play-start { padding-inline: 9px; font-size: 10px; gap: 7px; }
+  .bug-disclaimer { max-width: 75px; font-size: 10px; }
+}
+[data-motion='off'] .playground-section *, [data-motion='off'] .playground-section *::before, [data-motion='off'] .playground-section *::after { animation: none !important; transition: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  .playground-section *, .playground-section *::before, .playground-section *::after { animation: none !important; transition: none !important; }
+}

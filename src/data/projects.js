@@ -1,0 +1,173 @@
+export const PROJECT_CATEGORIES = ['All projects', 'AI & data', 'Development', 'IoT', 'Automation'];
+
+// Curated for technical scope, rather than sorted by the last README edit.
+// Replace an image path here after adding your screenshot to public/projects/.
+export const PROJECTS = [
+  {
+    id: 'group-ride-sharing', title: 'Ride Map',
+    subtitle: 'A shared map for the whole riding crew.',
+    description: 'A mobile group-ride app with live GPS locations, private groups, invite codes, and persistent ride chat. Built with React Native and Expo, using Mapbox for maps and Supabase for authentication, data, and realtime updates.',
+    image: 'projects/group-ride-sharing.svg', category: 'Development',
+    technologies: ['React Native', 'TypeScript', 'Supabase', 'Mapbox'],
+    repository: 'GroupRideSharingApp', featured: true,
+    highlights: ['Live rider locations with presence and stale-marker cleanup.', 'Private groups, invite codes, and persisted chat history.', 'Group-scoped row-level security and atomic Postgres operations.'],
+  },
+  {
+    id: 'robotic-arm-rl', title: 'Robotic Arm Learning',
+    subtitle: 'Teaching simulated arms to reach, grasp, and place.',
+    description: 'A simulation project combining PPO target reaching with a KUKA arm and imitation-trained pick-and-place with a Franka Panda arm. PyBullet provides the physics; evaluation records task outcomes, seeds, and checkpoint evidence. The work is simulation-only.',
+    image: 'projects/robotic-arm-rl.svg', category: 'AI & data',
+    technologies: ['Python', 'PyBullet', 'Gymnasium', 'Stable-Baselines3'],
+    repository: 'robotic-arm-rl', featured: true,
+    highlights: ['PPO reaching with separate inverse-kinematics and random baselines.', 'Imitation-trained manipulation using physical gripper contact and simulator state.', 'Persistent three-object demos, stress evaluations, and reproducible reports.'],
+  },
+  {
+    id: 'risk-evaluation', title: 'BIPAD Risk Platform',
+    subtitle: 'From Nepal’s disaster records to a map of risk.',
+    description: 'A disaster analytics platform that ingests Nepal’s BIPAD incident data, validates spatial records, and trains seasonal risk models. A Django API and React map dashboard expose the results, supported by scheduled pipelines and experiment tracking.',
+    image: 'projects/risk-evaluation.svg', category: 'AI & data',
+    technologies: ['Django', 'PostGIS', 'Airflow', 'React'],
+    repository: 'Risk_Evaluation_Platform', featured: true,
+    highlights: ['Repeatable ingestion and spatial data validation.', 'MLflow experiments, temporal holdout evaluation, and scheduled retraining.', 'API and Leaflet map dashboard with illustrative risk bands.'],
+  },
+  {
+    id: 'seoul-bike-pipeline', title: 'Seoul Bike Pipeline',
+    subtitle: 'A demand model with the engineering around it.',
+    description: 'A containerized MLOps workflow for predicting Seoul bike rental demand from weather and historical rental data. It connects ingestion, validation, preprocessing, storage, training, serving, and monitoring into an orchestrated pipeline.',
+    image: 'projects/seoul-bike-pipeline.svg', category: 'AI & data',
+    technologies: ['Airflow', 'MLflow', 'FastAPI', 'Docker'],
+    repository: 'Seoul-Bike-Pipeline', featured: true,
+    highlights: ['Seven pipeline stages with Great Expectations data checks.', 'Experiment tracking and a FastAPI prediction service.', 'Evidently drift reports, Redis, and MariaDB ColumnStore.'],
+  },
+  {
+    id: 'restaurant-saas', title: 'TableFlow',
+    subtitle: 'One order, from QR menu to kitchen to checkout.',
+    description: 'A multi-tenant restaurant POS platform with QR ordering and live Kitchen, Waiter, and Cashier dashboards. React interfaces connect to a Spring Boot backend with tenant isolation, role permissions, and realtime order updates.',
+    image: 'projects/restaurant-saas.svg', category: 'Development',
+    technologies: ['React', 'Spring Boot', 'PostgreSQL', 'WebSocket'],
+    repository: 'Restaurant-SAAS', featured: true,
+    highlights: ['Restaurant onboarding, menus, and a shared order lifecycle.', 'Tenant isolation with JWT-scoped authentication and permissions.', 'WebSocket/STOMP updates across three staff dashboards.'],
+  },
+  {
+    id: 'sonar-classifier', title: 'Sonar Target Classifier',
+    subtitle: 'Sixty readings. Rock or mine?',
+    description: 'A Django application that classifies sonar returns as mine or rock using an RBF-kernel support vector machine. It wraps the model in an authenticated interface for submitting readings and reviewing prediction history.',
+    image: 'projects/sonar-classifier.svg', category: 'AI & data',
+    technologies: ['Python', 'Django', 'scikit-learn', 'NumPy'],
+    repository: 'sonar-mine-and-rock-classifier', featured: true,
+    highlights: ['CSV or pasted input for 60 frequency-band readings.', 'Held-out sample inputs and per-user prediction history.', 'Account recovery and administrative prediction browsing.'],
+  },
+  {
+    id: 'code-crunch', title: 'Code Crunch',
+    subtitle: 'Connecting people with mental health professionals.',
+    description: 'A Flask appointment platform with professional profiles, conversational booking assistance, appointment management, and reviews. Email notifications and an admin dashboard connect the visitor and administration workflows.',
+    image: 'projects/code-crunch.svg', category: 'Development',
+    technologies: ['Flask', 'SQLAlchemy', 'SQLite', 'Jinja2'],
+    repository: 'Code-Crunch',
+    highlights: ['Professional profiles, reviews, and appointment booking.', 'Conversational assistance for the booking flow.', 'Flask-Mail notifications and an administration dashboard.'],
+  },
+  {
+    id: 'flight-booking', title: 'Flight Booking System',
+    subtitle: 'Two interfaces. One booking engine.',
+    description: 'A Java desktop booking application with both command-line and Swing interfaces. It uses the Command pattern to organize flight, customer, and booking operations, with file persistence and backup/recovery support.',
+    image: 'projects/flight-booking.svg', category: 'Development',
+    technologies: ['Java', 'Swing', 'Command pattern'],
+    repository: 'FlightBookingSystem',
+    highlights: ['Admin and user roles with session management.', 'One-way and return trips with booking history.', 'File-backed persistence, automatic backups, and rollback.'],
+  },
+  {
+    id: 'expense-tracker', title: 'Personal Expense Tracker',
+    subtitle: 'A clearer picture of where the money goes.',
+    description: 'A PHP and MariaDB personal finance application for tracking income and expenses, setting category budgets, and managing recurring payments. Charts, financial reports, and budget alerts help make spending patterns visible.',
+    image: 'projects/expense-tracker.svg', category: 'Development',
+    technologies: ['PHP', 'MariaDB', 'JavaScript', 'Bootstrap'],
+    repository: 'Personal-Expense-Tracker',
+    highlights: ['Income and expense tracking with category budgets.', 'Recurring transactions and budget alerts.', 'Spending charts and financial reports.'],
+  },
+  {
+    id: 'airline-satisfaction', title: 'Airline Satisfaction ML',
+    subtitle: 'What makes a passenger leave satisfied?',
+    description: 'A comparative machine learning study of airline passenger satisfaction using 129,888 records. The workflow covers cleaning, exploratory analysis, feature engineering, and classification model evaluation in Python.',
+    image: 'projects/airline-satisfaction.svg', category: 'AI & data',
+    technologies: ['Python', 'scikit-learn', 'LightGBM', 'Pandas'],
+    repository: 'airline-passenger-satisfaction-ml',
+    highlights: ['Exploratory analysis and feature engineering.', 'Random Forest, LightGBM, and Logistic Regression comparisons.', 'Class balancing with SMOTE and multiple evaluation metrics.'],
+  },
+  {
+    id: 'fuel-efficiency', title: 'Fuel Efficiency Modeling',
+    subtitle: 'Finding the patterns behind miles per gallon.',
+    description: 'An Auto MPG analysis combining data cleaning, exploratory plots, statistical hypothesis tests, regression, and clustering. The notebook compares Linear Regression and Random Forest models and explores which vehicle characteristics influence fuel economy.',
+    image: 'projects/fuel-efficiency.svg', category: 'AI & data',
+    technologies: ['Python', 'Pandas', 'scikit-learn', 'SciPy'],
+    repository: 'Analysis-and-Predictive-Modeling-of-Automobile-Fuel-Efficiency',
+    highlights: ['Missing-value handling and outlier treatment.', 'ANOVA and Tukey tests for regional MPG differences.', 'Regression comparisons, feature importance, and K-means clustering.'],
+  },
+  {
+    id: 'water-conservation', title: 'Smart Water Conservation',
+    subtitle: 'Let the sensors decide when it is time to water.',
+    description: 'An Arduino irrigation and water-monitoring system simulated in Tinkercad. Soil moisture, temperature, light, and tank-level readings control the pump and trigger visual or audible alerts.',
+    image: 'projects/water-conservation.svg', category: 'IoT',
+    technologies: ['Arduino', 'C++', 'Tinkercad', 'Sensors'],
+    repository: 'Smart-Water-Conservation-System-IOT',
+    highlights: ['Multiple environmental sensors and automatic pump control.', 'Low-water and moist-soil checks before watering.', 'Live LCD readings, LEDs, and buzzer alerts.'],
+  },
+  {
+    id: 'cvisionary', title: 'CVisionary',
+    subtitle: 'An early interface concept for a smarter CV review.',
+    description: 'A multi-page frontend concept for a CV analysis service, with pages for uploads, results, features, pricing, and account access. Upload controls and sample results explore the proposed user experience, with simulated processing.',
+    image: 'projects/cvisionary.svg', category: 'Development',
+    technologies: ['HTML', 'CSS', 'JavaScript'],
+    repository: 'CVisionary',
+    highlights: ['Resume upload and results page designs.', 'Feature, pricing, and account interface pages.', 'An early exploration of a career-focused product interface.'],
+  },
+  {
+    id: 'car-dealership', title: 'Car Dealership Website',
+    subtitle: 'A showroom built from the fundamentals.',
+    description: 'A multi-page frontend design exercise built with semantic HTML and handwritten CSS. It includes vehicle listings, a detail page, contact information, and account screen mockups.',
+    image: 'projects/car-dealership.svg', category: 'Development',
+    technologies: ['HTML5', 'CSS3'],
+    repository: 'Car-Dealership-Website',
+    highlights: ['Car browsing and vehicle specification pages.', 'Shared styling alongside page-specific layouts.', 'Contact and account mockups without a backend.'],
+  },
+  {
+    id: 'hospital-management', title: 'Hospital Management System',
+    subtitle: 'An early exercise in organizing real-world records.',
+    description: 'A console-based Python academic project for doctor and patient administration. Object-oriented workflows support assignments, discharge, file-backed records, and management reports with Matplotlib visualizations.',
+    image: 'projects/hospital-management.svg', category: 'Development',
+    technologies: ['Python', 'OOP', 'Matplotlib'],
+    repository: 'Hospital-Management-System',
+    highlights: ['Doctor profiles, patient records, and doctor assignments.', 'File-based save and load operations.', 'Reports on appointments, patient counts, and illness types.'],
+  },
+  {
+    id: 'portfolio', title: 'This Portfolio',
+    subtitle: 'The little corner of the internet you are in.',
+    description: 'A React and Vite portfolio built as an interactive notebook: a project drawer, draggable stickers, a drawing pad, and a small game. Includes light and dark themes, reduced-motion support, and contact draft or EmailJS delivery options.',
+    image: 'projects/portfolio.svg', category: 'Development',
+    technologies: ['React', 'Vite', 'CSS', 'EmailJS'],
+    repository: 'Portfolio',
+    highlights: ['Searchable project drawer with detail dialogs.', 'Draggable stickers, a sketchpad, and a bug-catching game.', 'Keyboard access, reduced motion, and persistent theme preferences.'],
+  },
+  {
+    id: 'n8n-automation', title: 'n8n on Render',
+    subtitle: 'A small deployment experiment with workflow automation.',
+    description: 'A repository created from the render-examples/n8n deployment template. Its Render configuration pairs the official n8n Docker image with a Postgres database for workflow data.',
+    image: 'projects/n8n-automation.svg', category: 'Automation',
+    technologies: ['n8n', 'Render', 'Docker', 'PostgreSQL'],
+    repository: 'n8n-mqtf7eir',
+    highlights: ['Template-based infrastructure configuration in render.yaml.', 'A web service running the official n8n image.', 'Postgres storage for n8n data.'],
+  },
+].map((project, index) => ({
+  ...project,
+  number: String(index + 1).padStart(2, '0'),
+  alt: project.alt || project.title + ' project preview',
+  github: 'https://github.com/SupremShrestha/' + project.repository,
+}));
+
+export function filterProjects(category, query = '') {
+  const words = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  return PROJECTS.filter((project) => {
+    if (category !== 'All projects' && project.category !== category) return false;
+    const searchable = [project.title, project.subtitle, project.description, project.category, project.repository, ...project.technologies, ...project.highlights].join(' ').toLowerCase();
+    return words.every((word) => searchable.includes(word));
+  });
+}

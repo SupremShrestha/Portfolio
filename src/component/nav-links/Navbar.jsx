@@ -1,81 +1,65 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { Menu, Moon, Pause, Play, Sun, X } from 'lucide-react';
 import './Navbar.css';
 
 const SECTIONS = [
-  { id: 'home', label: 'Home' },
-  { id: 'about', label: 'About' },
-  { id: 'education', label: 'Education' },
-  { id: 'projects', label: 'Projects' },
-  { id: 'contact', label: 'Contact' },
+  { id: 'home', label: 'home' },
+  { id: 'projects', label: 'work' },
+  { id: 'about', label: 'about' },
+  { id: 'playground', label: 'play' },
+  { id: 'contact', label: 'say hi ↗' },
 ];
 
-const Navbar = () => {
+export default function Navbar({ theme, toggleTheme, motionOn, toggleMotion, reducedMotion }) {
   const [activeSection, setActiveSection] = useState('home');
-  const tickingRef = useRef(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuButton = useRef(null);
+  const headerRef = useRef(null);
 
-  const scrollToSection = useCallback((sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (!element) return;
-    element.scrollIntoView({ behavior: 'smooth' });
-    setActiveSection(sectionId);
-  }, []);
-
-  // Throttled scroll-spy via rAF; avoids re-render storms.
   useEffect(() => {
+    let frame;
     const update = () => {
-      tickingRef.current = false;
-      const scrollPosition = window.scrollY + 120;
-      let current = SECTIONS[0].id;
+      frame = null;
+      let current = 'home';
       for (const { id } of SECTIONS) {
-        const el = document.getElementById(id);
-        if (!el) continue;
-        if (scrollPosition >= el.offsetTop) current = id;
+        if (document.getElementById(id)?.getBoundingClientRect().top <= 160) current = id;
       }
-      setActiveSection((prev) => (prev === current ? prev : current));
+      if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 8) current = 'contact';
+      setActiveSection(current);
     };
-
-    const onScroll = () => {
-      if (tickingRef.current) return;
-      tickingRef.current = true;
-      requestAnimationFrame(update);
-    };
-
+    const onScroll = () => { if (!frame) frame = requestAnimationFrame(update); };
     update();
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    return () => { window.removeEventListener('scroll', onScroll); cancelAnimationFrame(frame); };
   }, []);
 
-  return (
-    <header>
-      <a
-        href="#home"
-        className="portfolio-logo"
-        onClick={(e) => {
-          e.preventDefault();
-          scrollToSection('home');
-        }}
-      >
-        My Portfolio
-      </a>
+  useEffect(() => {
+    if (!menuOpen) return;
+    const dismiss = (event) => {
+      if (event.key === 'Escape') { setMenuOpen(false); menuButton.current?.focus(); }
+      if (event.type === 'pointerdown' && !headerRef.current?.contains(event.target)) setMenuOpen(false);
+    };
+    document.addEventListener('keydown', dismiss);
+    document.addEventListener('pointerdown', dismiss);
+    return () => { document.removeEventListener('keydown', dismiss); document.removeEventListener('pointerdown', dismiss); };
+  }, [menuOpen]);
 
-      <nav className="navbar" aria-label="Primary">
-        {SECTIONS.map(({ id, label }) => (
-          <a
-            key={id}
-            href={`#${id}`}
-            className={`navlinks ${activeSection === id ? 'active' : ''}`}
-            aria-current={activeSection === id ? 'page' : undefined}
-            onClick={(e) => {
-              e.preventDefault();
-              scrollToSection(id);
-            }}
-          >
-            {label}
-          </a>
-        ))}
-      </nav>
+  return (
+    <header className="site-header" ref={headerRef}>
+      <div className="container header-inner">
+        <a href="#home" className="brand" aria-label="Suprem Shrestha, home" onClick={() => setMenuOpen(false)}>suprem<span>.sh</span><span className="brand-spark" aria-hidden="true">✳</span></a>
+        <nav className={'primary-nav ' + (menuOpen ? 'is-open' : '')} id="primary-navigation" aria-label="Main navigation">
+          {SECTIONS.map(({ id, label }) => (
+            <a key={id} href={'#' + id} className={activeSection === id ? 'active' : ''}
+              aria-current={activeSection === id ? 'location' : undefined} onClick={() => setMenuOpen(false)}>{label}</a>
+          ))}
+        </nav>
+        <div className="header-controls">
+          <button type="button" className="header-control" onClick={toggleTheme} aria-label={'Switch to ' + (theme === 'light' ? 'dark' : 'light') + ' mode'} title={theme === 'light' ? 'Lights off' : 'Lights on'}>{theme === 'light' ? <Moon size={17} /> : <Sun size={17} />}</button>
+          <button type="button" className="header-control motion-control" onClick={toggleMotion} aria-pressed={!motionOn} disabled={reducedMotion} aria-label={motionOn ? 'Pause animations' : 'Resume animations'} title={reducedMotion ? 'Reduced motion follows your system preference' : motionOn ? 'Pause animations' : 'Resume animations'}>{motionOn ? <Pause size={16} /> : <Play size={16} />}</button>
+          <button ref={menuButton} className="header-control menu-toggle" type="button" onClick={() => setMenuOpen((open) => !open)} aria-expanded={menuOpen} aria-controls="primary-navigation" aria-label={menuOpen ? 'Close menu' : 'Open menu'}>{menuOpen ? <X size={21} /> : <Menu size={21} />}</button>
+        </div>
+      </div>
     </header>
   );
-};
-
-export default Navbar;
+}

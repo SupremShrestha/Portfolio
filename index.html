@@ -2,9 +2,26 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="%BASE_URL%favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <meta name="theme-color" content="#f4f4f4" />
+    <script>
+      // Apply saved preferences before the first paint.
+      (() => {
+        try {
+          const theme = localStorage.getItem('suprem-theme') === 'dark' ? 'dark' : 'light';
+          const motion = localStorage.getItem('suprem-motion') !== 'off' && !matchMedia('(prefers-reduced-motion: reduce)').matches;
+          document.documentElement.dataset.theme = theme;
+          document.documentElement.dataset.motion = motion ? 'on' : 'off';
+          document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#171717' : '#f4f4f4';
+        } catch { /* The site also works when browser storage is unavailable. */ }
+      })();
+    </script>
+    <meta name="description" content="Suprem Shrestha — Computer Science and AI student in Kathmandu, Nepal. Explore projects in artificial intelligence, web development, and thoughtful design." />
+    <meta property="og:title" content="Suprem Shrestha — Developer & Creative Thinker" />
+    <meta property="og:description" content="A small corner of the internet by Suprem Shrestha. Projects, experiments, movable stickers, and a little room to play." />
+    <meta property="og:type" content="website" />
+    <title>Suprem Shrestha — Developer & Creative Thinker</title>
   </head>
   <body>
     <div id="root"></div>

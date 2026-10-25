@@ -1,60 +1,50 @@
-# Portfolio
+# Suprem Shrestha — Portfolio
 
-A personal portfolio site that had one job: don't look like every other template with a fade-in hero and a "Contact Me" button that goes nowhere. This one does more.
+A playful portfolio built with React 19, Vite, and Lucide icons. Black-and-white foundations with cobalt, lilac, and warm yellow accents. A notebook, a project drawer, and a small playground.
 
-Live at: https://SupremeStha.github.io/Portfolio
+## Development
 
----
-
-## What's Actually In Here
-
-This isn't a static page pretending to be interactive — it's a real React app with its own cursor effects, animation engine, and a contact form that actually sends email.
-
-| Section | What it does |
-|---|---|
-| `Background` | Sets the visual stage before anything else loads |
-| `ClickSpark` | Sparks fly from your cursor on every click, because why not |
-| `HeroTitle` | The first impression |
-| `AboutMe` | The human behind the code |
-| `Education` | The paper trail |
-| `Projects` | The actual proof |
-| `Contact` | A real, working form — no "message sent to the void" here |
-| `Footer` | The quiet exit |
-
-## Built With
-
-This site runs on a stack chosen for speed, not just for a good-looking `package.json`:
-
-- **React 19** — component-driven, no spaghetti
-- **Vite** — because waiting for a dev server to boot is a crime
-- **Tailwind CSS 4** — utility classes over 900 lines of custom CSS nobody remembers writing
-- **GSAP** — for animations that feel like motion, not just CSS transitions pretending
-- **EmailJS** — a contact form with zero backend and zero excuses
-- **Lucide React & React Icons** — because hand-drawn SVGs are a weekend nobody has
-
-## Running It Yourself
-
-```bash
-git clone https://github.com/SupremeStha/Portfolio.git
-cd Portfolio
+```sh
 npm install
 npm run dev
 ```
 
-Open the local URL Vite gives you, and you're in.
-
-Other commands worth knowing:
-
-```bash
-npm run build      # production build
-npm run preview    # preview that build locally
-npm run lint        # keep the code honest
+```sh
+npm run build
+npm run preview
+npm test
 ```
 
-## Why It Looks Like This
+## Features
 
-Portfolios are supposed to prove you can build things — so this one avoids the trap of being a Word document with a nice font. Every section is a real component, every animation is intentional, and the click sparks exist purely because a portfolio site is the one place you're allowed to have a little fun with something that serves no functional purpose at all.
+- Sticky navigation with active section tracking, URL anchors, and a mobile menu.
+- Movable hero stickers: drag with a pointer, nudge with arrow keys, or reset with Home.
+- An original desk buddy that follows the pointer and responds to pokes.
+- All 17 GitHub projects, with six selected builds first, full-dataset search, category filters, grid/list views, shuffle, and hover tilt.
+- Shareable project details with next/previous browsing and copy-link feedback. Project URLs use `?project=<id>#projects` and support browser Back/Forward.
+- File tabs for the About section, an interactive skill explorer linked to actual projects, and expandable education cards.
+- A drawing pad with pen, eraser, undo, star stamps, and PNG export. Keyboard drawing uses arrows, Shift + arrows, and Enter.
+- A 15-second bug-catching game with a locally saved personal best.
+- Light/dark themes with coordinated color accents and an animation toggle. System reduced motion takes priority.
+- A searchable jump menu for sections and all 17 projects, opened from the corner button or Ctrl/Command + K.
+- Direct project entry points from the hero, and saved theme/motion preferences applied before the first paint.
+- Contact validation, copy email/message actions, and clear feedback.
+- Reduced motion support, visible keyboard focus, and a skip-to-content link.
 
-## A Note on the Contact Form
+Personal details live in the section components. Project information, curated ordering, and repository links are in `src/data/projects.js`. The selected builds are Ride Map, Robotic Arm Learning, BIPAD Risk Platform, Seoul Bike Pipeline, TableFlow, and Sonar Target Classifier. Selection reflects the documented technical scope; it is not a ranking by the most recent README update.
 
-It's wired up with EmailJS, meaning a message sent through this site lands directly in an inbox — not a console log, not a black hole. If you're reading this on GitHub and thinking about reaching out, the form on the live site is the fastest way.
+Project covers are clearly labeled placeholders in `public/projects/`. To add screenshots, follow [the image replacement guide](public/projects/README.md). No external image service is required.
+
+Theme, motion preferences, and the game high score are saved in browser local storage when available. Drawings stay in memory until you clear them or reload; Save PNG downloads a copy. All interactions work without an external service.
+
+## Contact form
+
+With no configuration, submitting a valid message opens a prefilled draft in the visitor’s email application. The visitor must send the email there. The form keeps its contents and offers a copy-message alternative; it never claims an email was sent.
+
+For direct delivery, copy `.env.example` to `.env.local` and provide all three EmailJS browser settings. Configure your EmailJS template recipient as `ssuprim26@gmail.com`, set Reply-To to `{{reply_to}}`, and use `{{from_name}}`, `{{from_email}}`, and `{{message}}` in the template. Enable your deployed domain in EmailJS. The recipient should be fixed in the EmailJS dashboard. Vite browser configuration is public; do not put private API keys in these variables.
+
+Restart Vite after changing environment variables. Direct delivery displays success only after EmailJS accepts the request and preserves the message on failure. No real email is sent during automated tests.
+
+## Deployment
+
+The default build uses relative asset paths, so the generated `dist/` folder works at the domain root or under a path such as `/Portfolio/`. Deploy its contents with your preferred static host.

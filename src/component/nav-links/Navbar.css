@@ -1,119 +1,27 @@
-header {
-    height: 80px;
+.site-header { position: sticky; top: 0; z-index: 50; height: 83px; border-bottom: 2px solid var(--ink); background: var(--paper); }
+.header-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 25px; }
+.brand { display: inline-flex; align-items: center; font-size: 25px; font-weight: 900; letter-spacing: -1.6px; white-space: nowrap; }
+.brand > span:first-child { font-weight: 400; }
+.brand-spark { margin-left: 8px; font-size: 23px; color: var(--accent); }
+[data-motion="on"] .brand:hover .brand-spark { animation: spin 4s linear infinite; }
+.primary-nav { display: flex; align-items: center; gap: 28px; }
+.primary-nav a { font-size: 12px; font-family: 'Courier New', monospace; position: relative; padding: 12px 1px; white-space: nowrap; }
+.primary-nav a::after { content: ''; position: absolute; left: 0; bottom: 5px; width: 100%; height: 3px; background: var(--accent); transform: scaleX(0) rotate(-3deg); transform-origin: left; transition: transform .2s; border-radius: 50%; }
+.primary-nav a:hover::after, .primary-nav a.active::after { transform: scaleX(1) rotate(-3deg); }
+.header-controls { display: flex; align-items: center; gap: 8px; }
+.header-control { display: grid; place-items: center; border: 1.5px solid var(--ink); border-radius: 50%; background: var(--panel); width: 35px; height: 35px; padding: 0; transition: transform .2s, background .2s; }
+.header-control:hover:not(:disabled) { transform: rotate(-10deg); background: var(--lilac); color: var(--tint-ink); }
+.menu-toggle { display: none; }
+@media (max-width: 900px) { .primary-nav { gap: 18px; } .brand { font-size: 23px; } .header-inner { gap: 15px; } }
+@media (max-width: 700px) {
+  .site-header { height: 73px; }
+  .menu-toggle { display: grid; }
+  .primary-nav { display: none; position: absolute; top: 71px; left: 0; width: 100%; padding: 18px 20px; background: var(--paper); border-bottom: 2px solid var(--ink); gap: 0; }
+  .primary-nav.is-open { display: flex; flex-direction: column; align-items: stretch; }
+  .primary-nav a { font-size: 17px; padding: 15px 10px; }
+  .primary-nav a::after { width: 40px; left: 10px; }
+  .brand { font-size: 24px; }
+  .header-controls { gap: 7px; }
+  .header-control { width: 33px; height: 33px; }
 }
-
-.navbar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid white;
-    padding: 20px;
-    width: fit-content;
-    max-width: calc(100vw - 2rem);
-    border-radius: 20px;
-    margin: 20px auto;
-    height: 65px;
-    background: #20222467;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
-    gap: 10px;
-}
-
-.portfolio-logo {
-    position: fixed;
-    top: clamp(1.5rem, 5vh, 3.5rem);
-    left: 5%;
-    color: white;
-    font-size: clamp(1rem, 2vw, 1.5rem);
-    font-weight: bold;
-    cursor: pointer;
-    transition:
-        color var(--transition-speed, 0.3s) ease,
-        transform var(--transition-speed, 0.3s) ease;
-    white-space: nowrap;
-    z-index: 1001;
-}
-
-.portfolio-logo:hover {
-    color: #adb5bd;
-    transform: scale(1.05);
-}
-
-.navlinks {
-    margin: 0 10px;
-    color: #adb5bd;
-    transition:
-        color 0.3s ease,
-        border-color 0.3s ease,
-        background-color 0.3s ease,
-        transform 0.3s ease;
-    border: 2px solid transparent;
-    padding: 10px 15px;
-    border-radius: 15px;
-    cursor: pointer;
-    min-width: 80px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.9rem;
-    white-space: nowrap;
-}
-
-.navlinks:hover,
-.navlinks:focus-visible {
-    color: white;
-    border-color: white;
-    transform: scale(1.05);
-    outline: none;
-}
-
-.navlinks.active {
-    color: white;
-    border-color: white;
-    background: rgba(255, 255, 255, 0.1);
-}
-
-/* Hide logo before it can collide with the centered navbar */
-@media (max-width: 1200px) {
-    .portfolio-logo {
-        display: none;
-    }
-}
-
-@media (max-width: 768px) {
-    .navbar {
-        padding: 15px 10px;
-        height: 70px;
-        gap: 5px;
-    }
-    .navlinks {
-        margin: 0 5px;
-        padding: 8px 12px;
-        min-width: 60px;
-        height: 35px;
-        font-size: 0.8rem;
-    }
-}
-
-@media (max-width: 640px) {
-    .navbar {
-        flex-wrap: wrap;
-        height: auto;
-        padding: 10px;
-        width: 92%;
-        top: 12px;
-    }
-    .navlinks {
-        margin: 4px;
-        padding: 6px 10px;
-        min-width: 0;
-        height: 30px;
-        font-size: 0.75rem;
-    }
-}
+@media (max-width: 360px) { .brand { font-size: 22px; } .brand-spark { display: none; } }

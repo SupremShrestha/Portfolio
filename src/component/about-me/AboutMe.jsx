@@ -1,145 +1,149 @@
-import { useCallback } from 'react';
-import { FaReact, FaJs, FaHtml5, FaCss3Alt } from 'react-icons/fa';
-import {
-  SiDjango,
-  SiPython,
-  SiFirebase,
-  SiFlask,
-  SiFigma,
-  SiCanva,
-  SiAdobephotoshop,
-} from 'react-icons/si';
-import {
-  MdCode,
-  MdStorage,
-  MdDesignServices,
-  MdBrush,
-} from 'react-icons/md';
+import { createElement, useId, useRef, useState } from 'react';
+import { ArrowUpRight, Braces, CircuitBoard, Cpu, Database, MapPin } from 'lucide-react';
+import { PROJECTS } from '../../data/projects';
+import { getProjectHref, navigateToProject } from '../../lib/projectNavigation';
 import './AboutMe.css';
 
 const SKILL_GROUPS = [
   {
-    title: 'Frontend',
-    Icon: MdCode,
-    items: [
-      { name: 'React', Icon: FaReact },
-      { name: 'JavaScript', Icon: FaJs },
-      { name: 'HTML', Icon: FaHtml5 },
-      { name: 'CSS', Icon: FaCss3Alt },
-    ],
+    id: 'web-mobile', title: 'Web & mobile', Icon: Braces,
+    description: 'Interfaces, APIs, and the shared state between them. From a live ride map to restaurant dashboards and appointment booking.',
+    tools: ['React', 'React Native', 'TypeScript', 'Supabase', 'Spring Boot', 'Flask', 'PostgreSQL', 'WebSocket'],
+    projectIds: ['group-ride-sharing', 'restaurant-saas', 'code-crunch'],
   },
   {
-    title: 'Backend',
-    Icon: MdStorage,
-    items: [
-      { name: 'Python', Icon: SiPython },
-      { name: 'Firebase', Icon: SiFirebase },
-      { name: 'Flask', Icon: SiFlask },
-      { name: 'Django', Icon: SiDjango },
-    ],
+    id: 'applied-ml', title: 'Applied ML', Icon: Cpu,
+    description: 'Models with a task to solve: classify a sonar return, compare passenger satisfaction models, or move a simulated robot arm.',
+    tools: ['Python', 'scikit-learn', 'LightGBM', 'NumPy', 'PyBullet', 'Gymnasium', 'Stable-Baselines3'],
+    projectIds: ['robotic-arm-rl', 'sonar-classifier', 'airline-satisfaction'],
   },
   {
-    title: 'Design',
-    Icon: MdDesignServices,
-    items: [
-      { name: 'UI/UX Design', Icon: MdBrush },
-      { name: 'Figma', Icon: SiFigma },
-      { name: 'Canva', Icon: SiCanva },
-      { name: 'Photoshop', Icon: SiAdobephotoshop },
-    ],
+    id: 'data-pipelines', title: 'Data pipelines', Icon: Database,
+    description: 'The work around the model: repeatable ingestion, data checks, scheduled training, prediction APIs, and monitoring.',
+    tools: ['Airflow', 'MLflow', 'FastAPI', 'Django', 'PostGIS', 'Docker', 'Great Expectations', 'Evidently'],
+    projectIds: ['risk-evaluation', 'seoul-bike-pipeline'],
   },
-];
+  {
+    id: 'fundamentals-iot', title: 'Fundamentals & IoT', Icon: CircuitBoard,
+    description: 'The nuts and bolts: object-oriented programs, desktop interfaces, file-backed records, and sensor-driven Arduino logic.',
+    tools: ['Java', 'Swing', 'Python', 'OOP', 'Matplotlib', 'Arduino', 'C++', 'Tinkercad'],
+    projectIds: ['flight-booking', 'water-conservation', 'hospital-management'],
+  },
+].map((group) => ({
+  ...group,
+  projects: group.projectIds.map((projectId) => PROJECTS.find((project) => project.id === projectId)).filter(Boolean),
+}));
 
-const STATS = [
-  { value: '2+', label: 'Years Experience', className: 'experience-badge', valueClass: 'years' },
-  { value: '4+', label: 'Projects Completed', className: 'project-badge', valueClass: 'count' },
-  { value: '∞', label: 'Curiosity Level', className: 'client-badge', valueClass: 'count' },
-];
+function openProject(event, projectId) {
+  if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  event.preventDefault();
+  navigateToProject(projectId);
+}
 
-const AboutMe = () => {
-  const scrollToProjects = useCallback(() => {
-    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-  }, []);
+const DIRECTIONS = [
+  { title: 'Models beyond the notebook', description: 'Connecting predictions to real data pipelines, APIs, and dashboards in the BIPAD and Seoul bike projects.' },
+  { title: 'Shared, realtime experiences', description: 'Working with live rider locations, persistent chat, and order updates across restaurant staff dashboards.' },
+  { title: 'Learning in simulation', description: 'Exploring target reaching and pick-and-place with simulated robot arms, baselines, and reproducible evaluations.' },
+];
+const FILES = ['about.txt', 'skills.json', 'now.md'];
+
+export default function AboutMe() {
+  const [activeFile, setActiveFile] = useState(0);
+  const [activeSkill, setActiveSkill] = useState(0);
+  const tabs = useRef([]);
+  const id = useId();
+  const selectedSkill = SKILL_GROUPS[activeSkill];
+
+  function handleTabKey(event, index) {
+    let next;
+    if (event.key === 'ArrowRight') next = (index + 1) % FILES.length;
+    if (event.key === 'ArrowLeft') next = (index - 1 + FILES.length) % FILES.length;
+    if (event.key === 'Home') next = 0;
+    if (event.key === 'End') next = FILES.length - 1;
+    if (next === undefined) return;
+    event.preventDefault();
+    setActiveFile(next);
+    tabs.current[next]?.focus();
+  }
 
   return (
-    <section className="about-section" id="about">
-      <div className="about-container">
-        <div className="about-header">
-          <h2 className="about-title">About Me</h2>
-          <div className="title-underline" aria-hidden="true" />
+    <section className="section about-section" id="about" aria-labelledby="about-heading">
+      <div className="container about-layout">
+        <div className="about-intro">
+          <p className="section-label">02 / WHO’S AT THE KEYBOARD?</p>
+          <h2 id="about-heading" className="section-title">The human<br />behind the <span className="about-scribble">tabs.</span></h2>
+          <p className="about-intro-copy">A little code. A little design. A lot of opening another tab to figure something out.</p>
+          <dl className="about-facts">
+            <div><dt className="mono">Name</dt><dd>Suprem Shrestha</dd></div>
+            <div><dt className="mono">Based in</dt><dd><MapPin size={14} aria-hidden="true" /> Kathmandu, Nepal</dd></div>
+            <div><dt className="mono">Studying</dt><dd>Computer Science + AI</dd></div>
+          </dl>
+          <a className="text-link" href="https://www.linkedin.com/in/supremshrestha/details/certifications/" target="_blank" rel="noopener noreferrer">The certificates folder <ArrowUpRight size={16} aria-hidden="true" /></a>
         </div>
 
-        <div className="about-content">
-          <div className="about-text">
-            <p className="about-intro">
-              I’m a second-year Computer Science (AI) student passionate about
-              artificial intelligence, data, and software development.
-            </p>
-
-            <p className="about-description">
-              I enjoy creating projects that combine intelligent systems, predictive
-              modeling, and practical applications. With intermediate coding skills
-              and curiosity, I constantly learn, experiment, and improve while applying
-              AI-driven solutions to meaningful real-world challenges.
-            </p>
-
-            <div className="skills-container">
-              <h3 className="skills-title">My Skills</h3>
-              <div className="skills-grid">
-                {SKILL_GROUPS.map(({ title, Icon, items }) => (
-                  <div className="skill-category" key={title}>
-                    <h4>
-                      <Icon size={20} className="skill-icon" aria-hidden="true" />
-                      {title}
-                    </h4>
-                    <ul>
-                      {items.map(({ name, Icon: ItemIcon }) => (
-                        <li key={name}>
-                          <ItemIcon size={16} className="skill-item-icon" aria-hidden="true" />
-                          {name}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
+        <div className="about-notebook">
+          <div className="about-file-bar"><span className="about-window-dots" aria-hidden="true"><i /><i /><i /></span><span className="mono">suprem / personal files</span><Braces size={17} aria-hidden="true" /></div>
+          <div className="about-tabs" role="tablist" aria-label="Get to know Suprem">
+            {FILES.map((file, index) => (
+              <button
+                key={file}
+                ref={(node) => { tabs.current[index] = node; }}
+                id={`${id}-tab-${index}`}
+                type="button"
+                role="tab"
+                aria-selected={activeFile === index}
+                aria-controls={`${id}-panel-${index}`}
+                tabIndex={activeFile === index ? 0 : -1}
+                onClick={() => setActiveFile(index)}
+                onKeyDown={(event) => handleTabKey(event, index)}
+              >{file}</button>
+            ))}
+          </div>
+          <div className="about-file-content">
+            <div className="about-file-panel" id={`${id}-panel-0`} role="tabpanel" aria-labelledby={`${id}-tab-0`} hidden={activeFile !== 0} tabIndex={0}>
+              <span className="about-file-comment mono">// Nice to meet you, internet person.</span>
+              <h3>I’m Suprem.<br />I learn by making things.</h3>
+              <p>I’m a Computer Science student specializing in Artificial Intelligence. I like the point where data, design, and development meet.</p>
+              <p>Some days that means experimenting with a predictive model. Other days it means moving a button a few pixels until the interface feels right.</p>
+              <p className="about-file-signoff">This portfolio is a collection of those experiments. <span aria-hidden="true">:)</span></p>
+            </div>
+            <div className="about-file-panel" id={`${id}-panel-1`} role="tabpanel" aria-labelledby={`${id}-tab-1`} hidden={activeFile !== 1} tabIndex={0}>
+              <span className="about-file-comment mono">// Tools I’ve used. Things you can open.</span>
+              <div className="about-skills">
+                <div className="about-skill-intro"><h3>Pick a stack.<br />See the work.</h3><span className="mono">04 toolboxes<br />real projects inside ↙</span></div>
+                <div className="about-skill-choices" role="group" aria-label="Explore skill groups">
+                  {SKILL_GROUPS.map(({ id: skillId, title, Icon }, index) => (
+                    <button key={skillId} type="button" aria-pressed={activeSkill === index} aria-controls={`${id}-skill-detail`} onClick={() => setActiveSkill(index)}>
+                      {createElement(Icon, { size: 17, 'aria-hidden': true })}<span>{title}</span>
+                    </button>
+                  ))}
+                </div>
+                <p className="visually-hidden" role="status">{selectedSkill.title} selected. {selectedSkill.projects.length} project examples below.</p>
+                <div className="about-skill-detail" id={`${id}-skill-detail`} role="region" aria-labelledby={`${id}-skill-heading`}>
+                  <h4 id={`${id}-skill-heading`}>{selectedSkill.title}</h4>
+                  <p>{selectedSkill.description}</p>
+                  <ul className="about-skill-tools" aria-label={`${selectedSkill.title} tools`}>{selectedSkill.tools.map((tool) => <li key={tool}>{tool}</li>)}</ul>
+                  <p className="about-skill-evidence-label mono">See it in a build <span aria-hidden="true">↓</span></p>
+                  <ul className="about-skill-projects">
+                    {selectedSkill.projects.map((project) => (
+                      <li key={project.id}><a href={getProjectHref(project.id)} onClick={(event) => openProject(event, project.id)}><span><strong>{project.title}</strong><span>{project.highlights[0]}</span></span><ArrowUpRight size={18} aria-hidden="true" /></a></li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
-
-            <div className="cta-container">
-              <button
-                type="button"
-                className="cta-button"
-                onClick={scrollToProjects}
-              >
-                View My Projects
-              </button>
-
-              <a
-                href="https://www.linkedin.com/in/supremshrestha/details/certifications/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <button type="button" className="cta-button-outline">
-                  View My Certifications
-                </button>
-              </a>
+            <div className="about-file-panel" id={`${id}-panel-2`} role="tabpanel" aria-labelledby={`${id}-tab-2`} hidden={activeFile !== 2} tabIndex={0}>
+              <span className="about-file-comment mono">// Threads running through the project drawer.</span>
+              <h3>Following the<br />interesting connections.</h3>
+              <ul className="about-now-list">
+                {DIRECTIONS.map(({ title, description }) => <li key={title}><span aria-hidden="true">↳</span><div><strong>{title}</strong><p>{description}</p></div></li>)}
+              </ul>
             </div>
           </div>
-
-          <div className="about-visual">
-            <div className="visual-container">
-              {STATS.map(({ value, label, className, valueClass }) => (
-                <div className={className} key={label}>
-                  <span className={valueClass}>{value}</span>
-                  <span className="label">{label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+          <div className="about-file-footer mono"><span><span className="about-file-cursor" aria-hidden="true" />{FILES[activeFile]}</span><span>always learning ↵</span></div>
+          <p className="about-tab-note" aria-hidden="true">↑ yes, the tabs work</p>
         </div>
       </div>
     </section>
   );
-};
-
-export default AboutMe;
+}
