@@ -1,0 +1,12 @@
+export const DISCIPLINES = [
+  { id: 'interfaces', title: 'Interfaces & experiences', label: 'Make it useful.', text: 'Building the connection between people and software. From live ride maps to restaurant dashboards and shared, realtime state.', tools: ['React', 'React Native', 'TypeScript', 'Spring Boot', 'Supabase'], project: 'group-ride-sharing' },
+  { id: 'intelligence', title: 'Intelligence & learning', label: 'Find the pattern.', text: 'Exploring how machines find patterns, make predictions, and learn through interaction. From sonar classification to robot simulation.', tools: ['Python', 'scikit-learn', 'PyBullet', 'Gymnasium', 'Stable-Baselines3'], project: 'robotic-arm-rl' },
+  { id: 'data', title: 'Data & the bigger picture', label: 'Connect the dots.', text: 'Making models useful beyond the notebook, with repeatable ingestion, validation, serving, and monitoring.', tools: ['Airflow', 'MLflow', 'FastAPI', 'PostGIS', 'Docker'], project: 'seoul-bike-pipeline' },
+  { id: 'systems', title: 'Systems & physical things', label: 'Understand the parts.', text: 'Exploring the foundations. Object-oriented programs, persistent records, and sensor-driven systems.', tools: ['Java', 'Python', 'Arduino', 'C++', 'Tinkercad'], project: 'water-conservation' },
+];
+
+export const EDUCATION = [
+  { id: 'foundations', year: '2012', period: '2012 — 2022', title: 'High School', place: 'Paragon Public School', heading: 'Where curiosity started.', note: 'An early curiosity for computers and mathematics.', reflection: 'The beginning of a question that still keeps me going: how does this work?', focus: ['Computers', 'Mathematics', 'Curiosity'] },
+  { id: 'science', year: '2022', period: '2022 — 2024', title: '+2 in Science', place: 'Reliance International Academy', heading: 'Learning to ask why.', note: 'Science, Computer Science, and problem solving.', reflection: 'Building a foundation for turning questions into things I could investigate and make.', focus: ['Science', 'Computer science', 'Problem solving'] },
+  { id: 'degree', year: '2024', period: '2024 — NOW', title: 'BSc (Hons) Computer Science', place: 'Sunway College / Birmingham University', heading: 'Exploring what comes next.', note: 'Specializing in Artificial Intelligence.', reflection: 'Connecting what I learn with practical experiments in interfaces, data, and machine learning.', focus: ['Computer science', 'Artificial intelligence', 'Learning by building'], current: true, project: 'robotic-arm-rl' },
+];

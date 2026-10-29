@@ -1,10 +1,13 @@
 import { useEffect, useRef } from 'react';
 import { THEMES } from '../lib/themes';
+const LETTER = [[.65,-1],[-.65,-1],[-1,-.6],[-.65,0],[.65,0],[1,.6],[.65,1],[-.65,1]];
+const SIGNATURE = [-1.4, 1.4].flatMap(offset => LETTER.map(([x,y]) => [x + offset,y]));
+const smoothstep = value => { const x = Math.max(0, Math.min(1, value)); return x*x*(3-2*x); };
 // Perspective star field with a gently twisting depth axis. Also powers the lab.
 export default function ParticleField({ motionOn, theme, interactive = false, mode = 'attract', burst = 0, paused = false }) {
   const canvasRef = useRef(null);
   const pulseRef = useRef(0);
-  const simulation = useRef({ time: 0, pointer: { x: .5, y: .5 }, eased: { x: .5, y: .5 } });
+  const simulation = useRef({ time: 0, intro: 0, pointer: { x: .5, y: .5 }, eased: { x: .5, y: .5 } });
   useEffect(() => { pulseRef.current = motionOn ? 1 : 0; }, [burst, motionOn]);
   useEffect(() => {
     const canvas = canvasRef.current, ctx = canvas.getContext('2d');
@@ -18,13 +21,17 @@ export default function ParticleField({ motionOn, theme, interactive = false, mo
       frame = 0;
       if (!width) return;
       const delta = last ? Math.min(now - last, 40) : 0; last = now;
-      if (motionOn && !paused) time += delta * .000018;
+      if (motionOn && !paused) { time += delta * .000018; simulation.current.intro += delta; }
+      if (!motionOn) simulation.current.intro = 2500;
       simulation.current.time = time;
       eased.x += (pointer.x - eased.x) * .04; eased.y += (pointer.y - eased.y) * .04;
       ctx.clearRect(0, 0, width, height);
       const centerX = width * .5, centerY = height * (interactive ? .5 : .42);
       const min = Math.min(width, height), spin = time * .12;
-      for (const star of stars) {
+      const intro = simulation.current.intro;
+      const formation = !interactive && motionOn ? smoothstep(intro / 550) * (1 - smoothstep((intro - 1350) / 1000)) : 0;
+      const signaturePoints = [];
+      for (const [index, star] of stars.entries()) {
         const depth = (star.z + time * .15) % 1, scale = .15 + depth * 1.4;
         const angle = spin + star.z * .5;
         let x = (star.x * Math.cos(angle) - star.y * Math.sin(angle)) * min * scale;
@@ -35,9 +42,21 @@ export default function ParticleField({ motionOn, theme, interactive = false, mo
           const strength = Math.max(0, 1 - distance / (min * .5)) * (mode === 'repel' ? -.55 : .55);
           x += dx * strength; y += dy * strength;
         } else { x += (eased.x - .5) * 20 * depth; y += (eased.y - .5) * 20 * depth; }
-        const pulse = 1 + pulseRef.current * .5;
+        if (index < SIGNATURE.length && formation > 0) {
+          const [sx, sy] = SIGNATURE[index];
+          x += (sx * min * .13 - x) * formation;
+          y += (sy * min * .16 - y) * formation;
+          signaturePoints.push([centerX + x, centerY + y]);
+        }
+        const pulse = interactive ? 1 + pulseRef.current * .5 : 1;
         ctx.beginPath(); ctx.arc(centerX + x * pulse, centerY + y * pulse, star.size * scale, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${accent},${.12 + depth * .65})`; ctx.fill();
+      }
+      if (formation > 0) {
+        ctx.strokeStyle = `rgba(${accent},${formation * .55})`; ctx.lineWidth = 1;
+        ctx.beginPath();
+        signaturePoints.forEach(([x, y], index) => { if (index % LETTER.length === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y); });
+        ctx.stroke();
       }
       if (interactive) {
         ctx.strokeStyle = `rgba(${accent},.3)`; ctx.lineWidth = 1;

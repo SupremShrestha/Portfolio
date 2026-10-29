@@ -235,9 +235,9 @@
 .contact-new h2 { font-size: clamp(80px,13.5vw,205px); line-height: .85; letter-spacing: -.08em; font-weight: 800; }
 .contact-new h2 > span { color: transparent; -webkit-text-stroke: 1.5px var(--accent-ink); }
 .contact-bottom { margin-top: 55px; display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; padding-top: 35px; border-top: 1px solid color-mix(in srgb,var(--accent-ink) 25%,transparent); }
-.contact-start { display: flex; align-items: center; justify-content: space-between; gap: 55px; padding: 13px 15px 13px 24px; border: 0; border-radius: 8px; background: var(--accent-ink); color: var(--accent); font-size: 15px; transition: gap .5s var(--ease); }
+.contact-start { display: flex; align-items: center; justify-content: space-between; gap: 55px; padding: 13px 15px 13px 24px; border: 0; border-radius: 8px; background: var(--accent-ink); color: var(--accent); font-size: 15px; transition: background .2s, transform .2s var(--ease); }
 .contact-start > span { display: grid; place-items: center; height: 45px; width: 45px; border: 1px solid color-mix(in srgb,var(--accent) 35%,transparent); border-radius: 50%; }
-.contact-start:hover { gap: 75px; }
+.contact-start:hover { transform: translateY(-2px); }
 .contact-direct > span { font: 7px var(--label); letter-spacing: 1px; opacity: .7; }
 .contact-direct > div { display: flex; align-items: center; gap: 12px; margin-top: 10px; }
 .contact-direct a { font-size: clamp(16px,2vw,28px); letter-spacing: -.04em; }
@@ -283,7 +283,7 @@
   .about-lead { font-size: 26px; } .about-bio > p:not(.about-lead) { font-size: 12px; } .discipline summary { gap: 10px; } .discipline h3 { font-size: 18px; } .discipline-content { padding-left: 0; }
   .about-numbers { gap: 30px; } .about-numbers strong { font-size: 53px; } .about-numbers span { font-size: 6px; }
   .lab-stage { height: 390px; } .lab-heading > p { font-size: 12px; }
-  .contact-start { gap: 30px; font-size: 12px; } .contact-start:hover { gap: 35px; }
+  .contact-start { gap: 30px; font-size: 12px; } .contact-start:hover { transform: translateY(-2px); }
   .footer-main { flex-wrap: wrap; } .footer-main nav { margin-left: auto; } .back-top { margin-left: auto; }
 }
 @media (max-width: 650px) {
@@ -344,3 +344,22 @@
 @media (max-width: 370px) { .hero-identity .overline { font-size: 5.5px; letter-spacing: 1px; } .new-hero { min-height: 600px; } .archive-total { display: none; } .discipline h3 { font-size: 18px; } .lab-controls button { padding: 9px 8px; font-size: 9px; } }
 @media (prefers-reduced-motion: reduce) { .hero-enter-work:hover,.new-button:hover,.art-open { transform: none; rotate: none; } }
 [data-motion='off'] .hero-enter-work:hover,[data-motion='off'] .new-button:hover { transform: none; rotate: none; }
+/* Contact delivery states keep the draft and alternatives visible. */
+.contact-form-intro { color: var(--dim); font-size: 13px; line-height: 1.8; margin: -15px 0 28px; }
+.message-meta { display: flex; justify-content: space-between; gap: 15px; font-size: 9px; color: var(--dim); line-height: 1.6; margin-top: 8px; }
+.message-meta > span:last-child { white-space: nowrap; }
+.contact-submit { width: 100%; }
+.contact-challenge { margin-bottom: 15px; min-height: 65px; }
+.contact-trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.delivery-note { display: flex; align-items: flex-start; gap: 7px; }
+.delivery-note svg { flex-shrink: 0; margin-top: 2px; }
+.contact-feedback { display: flex; align-items: flex-start; gap: 10px; font-size: 12px; line-height: 1.8; border-radius: 6px; }
+.contact-feedback:not(:empty) { margin-top: 16px; }
+.contact-feedback.success { padding: 15px; background: rgba(var(--accent-rgb),.08); border: 1px solid var(--accent); color: var(--accent); }
+.contact-feedback.error { color: #ffb4b0; }
+[data-theme='pearl'] .contact-feedback.error { color: #a82928; }
+.contact-feedback svg { flex-shrink: 0; margin-top: 2px; }
+.contact-alternatives { display: flex; justify-content: space-between; gap: 15px; flex-wrap: wrap; margin-top: 16px; }
+.contact-alternatives .quiet-link { font-size: 11px; }
+.sending-spinner { animation: sending-spin 1s linear infinite; }
+@keyframes sending-spin { to { transform: rotate(360deg); } }

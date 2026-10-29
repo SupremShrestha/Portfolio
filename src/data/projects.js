@@ -1,3 +1,6 @@
+import { PROJECT_MEDIA } from './media.js';
+import { CASE_STUDIES } from './caseStudies.js';
+
 export const PROJECT_CATEGORIES = ['All projects', 'AI & data', 'Development', 'IoT', 'Automation'];
 
 // Curated for technical scope, rather than sorted by the last README edit.
@@ -141,9 +144,9 @@ export const PROJECTS = [
   {
     id: 'portfolio', title: 'This Portfolio',
     subtitle: 'Engineering ideas. Designing possibilities.',
-    description: 'A React and Vite portfolio with a cinematic opening, a scroll-driven horizontal project showcase, and an interactive particle experiment. Three selectable themes, reduced-motion support, project deep links, and contact draft or EmailJS delivery options complete the experience.',
+    description: 'A React and Vite portfolio with a constellation opening, a scroll-driven project showcase, shared artwork transitions, and interactive experiments. Three selectable themes, reduced-motion support, project deep links, and a server-backed contact form with an email-draft fallback complete the experience.',
     image: 'projects/portfolio.svg', category: 'Development',
-    technologies: ['React', 'Vite', 'CSS', 'EmailJS'],
+    technologies: ['React', 'Vite', 'GSAP', 'CSS'],
     repository: 'Portfolio',
     highlights: ['Pinned project stories, a searchable archive, and shareable project detail sheets.', 'GSAP scroll choreography and a pointer- and keyboard-controlled particle field.', 'Three persistent color themes, keyboard navigation, and reduced-motion support.'],
   },
@@ -158,6 +161,8 @@ export const PROJECTS = [
   },
 ].map((project, index) => ({
   ...project,
+  media: PROJECT_MEDIA[project.id],
+  caseStudy: CASE_STUDIES[project.id],
   number: String(index + 1).padStart(2, '0'),
   alt: project.alt || project.title + ' — illustrative project cover',
   github: 'https://github.com/SupremShrestha/' + project.repository,

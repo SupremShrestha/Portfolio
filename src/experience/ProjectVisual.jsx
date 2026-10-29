@@ -1,6 +1,13 @@
-import { useId } from 'react';
+import { useId, useState } from 'react';
 export default function ProjectVisual({ project }) {
   const id = useId().replaceAll(':', '');
+  const [failedSource, setFailedSource] = useState(null);
+  const media = project.media;
+  if (media?.screenshot && failedSource !== media.screenshot) return <div className="project-visual visual-screenshot">
+    <div className="visual-top"><span className="visual-status"/><span>FROM THE PROJECT</span><span>↗</span></div>
+    <img src={import.meta.env.BASE_URL + media.screenshot} alt={media.alt || `${project.title} screenshot`} loading="lazy" decoding="async" width="1600" height="1400" onError={() => setFailedSource(media.screenshot)}/>
+    <div className="visual-bottom"><span>{media.caption || project.title}</span><span>{project.number}</span></div>
+  </div>;
   const ride = project.id === 'group-ride-sharing', robot = project.id === 'robotic-arm-rl', risk = project.id === 'risk-evaluation';
   const kind = ride ? 'ride' : robot ? 'robot' : risk ? 'risk' : 'system';
   return <div className={`project-visual visual-${kind}`}>
